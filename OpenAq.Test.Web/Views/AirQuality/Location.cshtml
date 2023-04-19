@@ -1,0 +1,22 @@
+﻿@model AqLocationViewModel
+
+<p>
+	@Model.SelectedCountryLabel
+	<b>@Model.SelectedCountryName</b>
+</p>
+<p>
+	@Model.SelectedCityLabel
+	<b>@Model.SelectedCityName</b>
+</p>
+
+@using (Html.BeginForm("Location", "AirQuality", FormMethod.Post))
+{
+	@Html.HiddenFor(x => x.SelectedCountryCode)
+	@Html.HiddenFor(x => x.SelectedCityName)
+	@Html.ValidationSummary();
+	@Html.LabelFor(x => x.SelectedLocation, Model.LocationLabel)
+	<br />
+	@Html.DropDownListFor(x => x.SelectedLocation, new SelectList(Model.Locations, nameof(LocationViewModel.Id), nameof(LocationViewModel.Name)))
+	<br />
+	<button type="submit">Submit</button>
+}

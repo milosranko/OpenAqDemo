@@ -1,0 +1,11 @@
+﻿@model AqCountryViewModel
+
+@using (Html.BeginForm("Index", "AirQuality", FormMethod.Post))
+{
+	@Html.ValidationSummary();
+	@Html.LabelFor(x => x.SelectedCountryCode, Model.CountriesLabel)
+	<br />
+	@Html.DropDownListFor(x => x.SelectedCountryCode, new SelectList(Model.CountriesDropDownList, nameof(CountryViewModel.Code), nameof(CountryViewModel.Name)))
+	<br />
+	<button type="submit">Submit</button>
+}

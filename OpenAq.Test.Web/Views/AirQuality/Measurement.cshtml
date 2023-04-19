@@ -1,0 +1,28 @@
+﻿@model AqMeasurementViewModel
+
+<p>
+	@Model.SelectedCountryLabel
+	<b>@Model.SelectedCountryName</b>
+</p>
+<p>
+	@Model.SelectedCityLabel
+	<b>@Model.SelectedCityName</b>
+</p>
+<p>
+	@Model.SelectedLocationLabel
+	<b>@Model.SelectedLocationName</b>
+</p>
+<p>
+	<ul>
+	@foreach (var item in Model.Measurements)
+	{
+		<li><b>@item.Parameter</b></li>
+		<li>@item.Value @item.Unit</li>
+		@if (item.Date.HasValue)
+		{
+		<li>@item.Date.Value.ToString("dd-MM-yyyy")</li>
+		}
+		<hr style="border: solid 1px" />
+	}
+	</ul>
+</p>
