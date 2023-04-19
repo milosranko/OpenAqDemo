@@ -6,6 +6,16 @@ using System.Net;
 
 var builder = WebApplication.CreateBuilder(args);
 
+#region Configuration binding
+
+builder.Configuration
+	.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+	.AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true)
+	.AddEnvironmentVariables()
+	.Build();
+
+#endregion
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<IAirQualityService, OpenAqService>();

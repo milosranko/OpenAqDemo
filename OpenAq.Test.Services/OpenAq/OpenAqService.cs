@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using OpenAq.Test.Abstractions.Interfaces;
 using OpenAq.Test.Integrations.Abstractions.Exceptions;
@@ -31,11 +32,16 @@ public class OpenAqService : IAirQualityService
 		.SetAbsoluteExpiration(TimeSpan.FromHours(1));
 	private readonly IMemoryCache _cache;
 	private readonly ILogger<OpenAqService> _logger;
+	private readonly IConfiguration _configuration;
 
-	public OpenAqService(IMemoryCache cache, ILogger<OpenAqService> logger)
+	public OpenAqService(IMemoryCache cache, ILogger<OpenAqService> logger, IConfiguration configuration)
 	{
 		_cache = cache;
 		_logger = logger;
+		_configuration = configuration;
+
+		if (!OpenAqClient.IsInitialized)
+			OpenAqClient.Initialize(_configuration.GetSection("OpenAqApiUrl").Value);
 	}
 
 	public async Task<Response<CityDto>> GetCities(string countryCode)
