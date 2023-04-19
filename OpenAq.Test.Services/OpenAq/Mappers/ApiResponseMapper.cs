@@ -56,7 +56,7 @@ internal static class ApiResponseMapper
 				Country = measurement.Country,
 				Location = measurement.Location,
 				LocationId = measurement.LocationId,
-				MeasurementDate = measurement.MeasurementDate?.Utc,
+				MeasurementDate = measurement.Date?.Utc,
 				Parameter = measurement.Parameter,
 				Unit = measurement.Unit,
 				Value = measurement.Value

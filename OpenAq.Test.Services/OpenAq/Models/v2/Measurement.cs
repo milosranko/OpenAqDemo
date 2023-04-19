@@ -15,7 +15,7 @@ internal class Measurement : OpenAqModelBase
 	[DataMember]
 	public decimal Value { get; set; }
 	[DataMember]
-	public MeasurementDate MeasurementDate { get; set; }
+	public MeasurementDate Date { get; set; }
 	[DataMember]
 	public string Unit { get; set; }
 	[DataMember]
